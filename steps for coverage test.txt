@@ -1,0 +1,34 @@
+1- we add in make file in compailation line  --coverage 
+
+2- then we run the test 
+
+3- after this we run this code lines
+
+------------------------------------------------
+
+export COV_OUTPUT=./cov_output
+lcov -rc lcov_branch_coverage=1 -c -i -d . -o .coverage.base
+lcov -rc lcov_branch_coverage=1 -c -d . -o .coverage.run
+lcov -rc lcov_branch_coverage=1 -d . -a .coverage.base -a .coverage.run -o .coverage.total
+genhtml --branch-coverage -o ${COV_OUTPUT} .coverage.total
+rm -f .coverage.base .coverage.run .coverage.tota
+
+
+-------------------------
+move the file from this directory to my directory 
+
+
+4- mv cov_output ~/public_html/
+
+ cp cov_output ~/public_html/~
+
+
+http://www.cc.puv.fi/~e1401492/
+
+http://www.cc.puv.fi/~e1401492/
+
+
+file:///U:/public_html/cov_output/u/d/e1401492/test_dir/exercises/ex3/index.html
+
+
+http://www.cc.puv.fi/~e1401492/cov_output/u/d/e1401492/test_dir/exercises/ex3/index.html
