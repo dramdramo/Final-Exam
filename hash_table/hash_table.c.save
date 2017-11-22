@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include  "linkedlist.h"
+
+int SIZE = 100;
+struct hash_element
+{
+	char *str;
+	struct hash_element *next;
+};
+
+int hash_function( char *key )
+{
+	return toupper( key[ 0 ] ) - 'A' % SIZE;
+}
+
+int add_to_hash_table( struct hash_element *hash_table[], char *key )
+{
+	int hash = hash_function(key);
+	if( hash_table[ hash ] == NULL )
+	{
+		 hash_table[ hash ] = ( struct hash_element* )malloc( sizeof( struct hash_element ) );
+		 hash_table[ hash ] -> str = key;
+		 	
+printf("\n Added %s to hash %d\n",key,hash);
+		 hash_table[ hash ] -> next = NULL;
+	}
+	else
+	{
+		printf("\n Colision ocurred!\n");
+		struct hash_element * temp = hash_table[ hash ];
+		while( temp != NULL )
+		{
+			temp = temp -> next;
+		}
+		temp = ( struct hash_element* )malloc( sizeof( struct hash_element ) );
+		temp -> str = key;
+		temp -> next = NULL;
+		printf("\n Added %s to hash %d\n",key,hash);
+	}
+}
+void  print_hash_table( struct hash_element * hash_table[] )
+{
+	int i;
+	struct hash_element * temp = hash_table[0];
+	for( i = 0; i < SIZE; i ++ )
+	{
+		temp = hash_table[ i ];
+		while( temp != NULL )
+		{
+			printf( "\n %s\n", temp -> str );
+			temp = temp->next;
+		}
+	}
+}
+void main()
+{
+	struct hash_element *hash_table[SIZE];
+	int i ;
+	for( i = 0; i < SIZE; i++)
+	{
+		hash_table[ i ] = NULL;
+	}
+	char *name ="Doru";
+	add_to_hash_table( hash_table, name);
+	name = "Dan";
+	add_to_hash_table( hash_table, name);
+	add_to_hash_table( hash_table, "Ann" );
+	add_to_hash_table( hash_table, "Abn" );
+	add_to_hash_table( hash_table, "Acn" );
+	add_to_hash_table( hash_table, "Zen" );
+	printf("\n -----------------\n")
+	print_hash_table(hash_table);
+}
